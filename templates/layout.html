@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Book Shoppee</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+  <style>
+    .dp{
+      width: 40%;
+      height: 179px;
+    }
+
+    .item{
+      margin-bottom: 5%;
+    }
+    @font-face {
+    font-family: Montserrat-Regular;
+    src: url(/Montserrat-Regular.otf);
+    }
+    body{
+      font-family: Montserrat-Regular;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.25em 0.4em;
+      font-size: 75%;
+      font-weight: 700;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: 0.25rem;
+    }
+
+    .badge:empty {
+      display: none;
+    }
+
+    .btn .badge {
+      position: relative;
+      top: -1px;
+    }
+
+    .badge-pill {
+      padding-right: 0.6em;
+      padding-left: 0.6em;
+      border-radius: 10rem;
+    }
+
+    .badge-primary {
+      color: #fff;
+      background-color: #007bff;
+    }
+
+  </style>
+</head>
+<body>
+  <nav class="nav-wrapper teal waves-effect">
+    <div class="container">
+        <a class="brand-logo text-uppercase" href="/">BOOK SHOPPE</a>
+      {% if not session.logged_in %}
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#"><i class="fas fa-user-plus waves-effect"></i> Sign Up</a></li>
+        <li><a href="/login"><i class="fas fa-signin-alt waves-effect"></i> Login</a></li>
+      </ul>
+      {% else %}
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/cart"><i class="fas fa-shopping-cart waves-effect"></i> Cart</a></li>
+          <li><a href="#"><i class="fas fa-user waves-effect"></i> User</a></li>
+      </ul>
+      {% endif %}
+    </div>
+  </nav>
+    <div class="container" >
+        {% block body %}
+        {% endblock %}
+    </div>
+    <!-- {% block footer %}
+    <center>Created by: Joel Vinay Kumar</center> 
+    {% endblock %}  -->
+</body>
+</html>

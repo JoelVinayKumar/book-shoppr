@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body%}
+	<br></br>
+	{% for i in range((size)//2) %}
+
+	  <ul class="collection hoverable">
+	    <li class="collection-item ">
+	      <i class="material-icons circle"></i>
+	      <b class="title text-lighten-5">{{ data['items'][i]["volumeInfo"]["title"] }}</b>
+	      <p>{{ data['items'][i]["volumeInfo"]["authors"][0] }}</p> 
+	      <a href="#!" class="secondary-content"><i class="fas fa-plus-circle" style="font-size:30px"></i></a>
+	    </li>
+	  </ul> 
+
+	{% endfor %}
+
+	<button class="btn teal right"><i class="fas fa-cart-plus"></i>   Proceed to Checkout</button>
+{% endblock %}
