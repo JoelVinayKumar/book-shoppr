@@ -1,4 +1,4 @@
-*** FLASK BOOK SHOPPE ***
+***FLASK BOOK SHOPPE
 
 **How should I use this template?
 
