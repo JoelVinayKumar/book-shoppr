@@ -8,8 +8,8 @@
       }
     </style>
     <div class="row container">
-      {% with currentBook=1 %}
-      <center class="col s3 h-100 waves-effect" style="margin-top: 30%;"><button class="btn waves-effect" id="prevBtn" style="border-radius: 50%" onclick="prev()"><i class="fas fa-caret-left"></i></button></center>
+      {% with currentBook=0 %}
+      <center class="col s3 h-100" style="margin-top: 30%;"><button class="btn waves-effect" id="prevBtn" style="border-radius: 50%" onclick="{{currentBook}}"><i class="fas fa-caret-left"></i></button></center>
         <div class="col s6 m6">
           <div class="card-panel card-adjust">
             <center><img class="card-image hoverable" src="{{ data['items'][currentBook]['volumeInfo']['imageLinks']['thumbnail'] }}" alt="book"></center>
@@ -22,7 +22,7 @@
             </blockquote>
         </div>
       </div>
-      <center class="col s3 h-100 waves-effect" style="margin-top: 30%"><button class="btn waves-effect" id="nextBtn" style="border-radius: 50%" onclick=""><i class="fas fa-caret-right"></i></button></center>
+      <center class="col s3 h-100" style="margin-top: 30%"><button class="btn waves-effect" id="nextBtn" style="border-radius: 50%" onclick="show()"><i class="fas fa-caret-right"></i></button></center>
       {% endwith %}
     </div>
 {% endblock %}

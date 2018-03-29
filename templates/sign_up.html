@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block body %}
+<br></br><br></br>
+<center>
+  <h4 class="text-center"><b>CREATE YOUR ACCOUNT</b></h4>
+</center>
+{% if error %}
+<p class="error"><strong>Error:</strong> {{ error }}{% endif %}
+    <form action="{{ url_for('login') }}" method="post">
+       <div class="container login-form">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form>
+              <div class="input-group login-userinput">
+                <span class="input-group-addon"></span>
+                <input class="form-control" type="text" name="uname" placeholder="Write your Username...">
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon"></span>
+                <input class="form-control" type="password" name="pwd" placeholder="Write your Password..."> 
+              </div><br>
+              <center><input class="btn btn-small" type="submit" value="Sign In"></input></center>
+            </form>     
+          </div>
+        </div>
+      </div>
+    </form>
+   
+<style>
+  body {
+    background: white no-repeat;
+  }
+  .login-form{width:390px;}
+  .login-userinput{margin-bottom: 10px;}
+  .login-button{margin-top:10px;}
+  .login-options{margin-bottom:0px;}
+  .login-forgot{float: right;}
+</style>
+  {% endblock %}
