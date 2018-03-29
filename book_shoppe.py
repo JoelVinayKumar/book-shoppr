@@ -142,10 +142,7 @@ def login():
 
 @app.route('/cart',methods=['GET','POST'])
 def cart():
-    # lst = CurrentCart.query.filter_by(label=price).all()
-    # total=0
-    # for t in lst:
-    #     total=total+t
+    # book = str(data['items'][id]["volumeInfo"]["authors"][0])
     return render_template('cart.html',size=len(data['items']), data=data, items= CurrentCart.query.all())
 
 @app.route('/clear_cart',methods=['GET'])
