@@ -4,9 +4,6 @@
   <title>Book Shoppee</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
@@ -19,21 +16,20 @@
     .item{
       margin-bottom: 5%;
     }
-
   </style>
 </head>
 <body>
   <nav class="nav-wrapper teal waves-effect">
     <div class="container">
-        <a class="brand-logo text-uppercase" href="/show_books">BOOK SHOPPE</a>
+        <a class="brand-logo text-uppercase" href="/show_books"><i class="fas fa-book"></i>  BOOK SHOPPE</a>
       {% if not session.logged_in %}
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#"><i class="fas fa-user-plus waves-effect"></i> Sign Up</a></li>
+        <!-- <li><a href="#"><i class="fas fa-user-plus waves-effect"></i> Sign Up</a></li> -->
         <li><a href="/login"><i class="fas fa-sign-in-alt waves-effect"></i> Login</a></li>
       </ul>
       {% else %}
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="/cart"><i class="fas fa-shopping-cart waves-effect"></i> Cart</a></li>
+          <li><a href="/cart"><i class="fas fa-shopping-cart waves-effect"></i> Cart<span class="new badge deep-purple darken-4">{{ session.log_count }}</span></a></li>
           <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
       </ul>
       {% endif %}

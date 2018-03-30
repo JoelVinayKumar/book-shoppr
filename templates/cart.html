@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block body%}
 	<br></br>
-	<a href="/clear_cart"><button class="btn teal left">Clear Cart</button></a>
+	<a href="/clear_cart"><button class="btn teal left waves-effect">Clear Cart</button></a>
 	<table class="center">
 		<thead>
 			  <th>Serail No</th>
@@ -22,9 +22,21 @@
 	        </tbody>
 		{% endfor %}
 	</table>
-	<br></br>
+	<br>
+	<h7 class="right"><b>Bill Amount:</b> ₹ {{ bill }}</h7>
+	</br>
 	<div>
-		<form><input type="text" name="name" placeholder="Name here..."><input type="text" name="phone" placeholder="Phone Number here..."></form><br>
-		<button class="btn teal right">₹ {{ bill }}<i class="fas fa-cart-plus"></i></button>
+		<form>
+			<div class="input-field col s6">
+	          <input id="last_name" type="text" class="validate">
+	          <label for="last_name">Name</label>
+	        </div>
+        	<div class="input-field col s6">
+	          <input id="last_name" type="text" class="validate">
+	          <label for="last_name">Password</label>
+	        </div>
+    	</form>
+    	<br>
+		<a href="/show_orders"><button class="btn teal right">Proceed To Checkout<i class="fas fa-cart-plus"></i></button></a>
 	</div>
 {% endblock %}
