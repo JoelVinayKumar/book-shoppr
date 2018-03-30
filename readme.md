@@ -1,6 +1,6 @@
-###FLASK BOOK SHOPPE
+### FLASK BOOK SHOPPE
 
-##How should I use this template?
+## How should I use this template?
 
 * Clone the folder or download the zip.
 * Install requirements (flask, flask_materialize, flask_sqlalchemy,sql alchemy)
