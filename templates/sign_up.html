@@ -3,29 +3,31 @@
 <br></br><br></br>
 <center>
   <h4 class="text-center"><b>CREATE YOUR ACCOUNT</b></h4>
-</center>
+</center><br>
 {% if error %}
 <p class="error"><strong>Error:</strong> {{ error }}{% endif %}
-    <form action="{{ url_for('login') }}" method="post">
+    <form action="{{ url_for('sign_up') }}" method="post">
        <div class="container login-form">
         <div class="panel panel-default">
           <div class="panel-body">
             <form>
-              <div class="input-group login-userinput">
-                <span class="input-group-addon"></span>
-                <input class="form-control" type="text" name="uname" placeholder="Write your Username...">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="last_name" type="text" class="validate" name="uname">
+                <label for="last_name">Name</label>
               </div>
-              <div class="input-group">
-                <span class="input-group-addon"></span>
-                <input class="form-control" type="password" name="pwd" placeholder="Write your Password..."> 
+              <div class="input-field col s6">
+                <i class="material-icons prefix">phone</i>
+                <input id="last_name" type="password" class="validate" name="pwd">
+                <label for="last_name">Password</label>
               </div><br>
-              <center><input class="btn btn-small" type="submit" value="Sign In"></input></center>
+              <center><input class="btn btn-small" type="submit" value="Sign Up"></input></center>
             </form>     
           </div>
         </div>
       </div>
     </form>
-   
+   <br><br>
 <style>
   body {
     background: white no-repeat;

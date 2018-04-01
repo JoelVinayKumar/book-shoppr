@@ -14,7 +14,7 @@ app.config['DEBUG'] = True
 app.config['SECRET_KEY'] ='super-secret-key'
 app.config['USERNAME'] = 'admin'
 app.config['PASSWORD'] = '12345'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bookshoppe.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bookshopper.db'
 
 db=SQLAlchemy(app)
 
@@ -36,26 +36,26 @@ class CustOrders(db.Model):
     email = db.Column(db.String(100), db.ForeignKey('login.email'))
     order_id = db.Column(db.Integer)
     datetime = db.Column(db.DateTime)
-    isbn=db.Column(db.String)
+    book=db.Column(db.String(100))
     quantity=db.Column(db.Integer)
     price=db.Column(db.Integer)
     
-    def __init__(self, serial, email, order_id, datetime, isbn, quantity, price):
+    def __init__(self, serial, email, order_id, datetime, book, quantity, price):
         self.email = email
         self.order_id = order_id
         self.datetime = datetime
-        self.isbn = isbn
+        self.book = book
         self.quantity = quantity
         self.price = price
 
     def __repr__(self):
-        return '<Entry %r %r %r %r %r %r>' % (self.email, self.order_id, self.datetime, self.isbn, self.quantity, self.price)
+        return '<Entry %r %r %r %r %r %r>' % (self.email, self.order_id, self.datetime, self.book, self.quantity, self.price)
 
 class CurrentCart(db.Model):
     # __tablename__ = 'users'
     serial = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100), db.ForeignKey('login.email'))
-    book = db.Column(db.String(20))
+    book = db.Column(db.String(100))
     quantity = db.Column(db.Integer)
     price = db.Column(db.Integer)
 
@@ -84,7 +84,7 @@ def authenticate(e, p):
 
 @app.route('/')
 def homepage():
-    return render_template('show_books.html', size=len(data['items']), data= data)
+    return render_template('homepage.html', size=len(data['items']), data= data)
 
 @app.route('/logout')
 def logout():
@@ -94,9 +94,19 @@ def logout():
     else:
         return render_template('show_books.html',size=len(data['items']), data= data)
 
-@app.route('/sign_up')
-def signup():
-    return render_template('sign_up.html')
+@app.route('/sign_up',methods=['GET','POST'])
+def sign_up():
+    error = None
+    if request.method== 'GET':
+        return render_template('sign_up.html')
+    else:
+        uname = request.form.get('uname')
+        pwd = request.form.get('pwd')
+        new_user = Login(uname,pwd)
+        db.session.add(new_user)
+        db.session.commit()
+        flash("Your account has been saved. Please save your creentials")
+        return render_template('sign_up.html')
 
 
 @app.route('/show_books')
@@ -111,7 +121,6 @@ def book(id):
         session['log_count']=len(CurrentCart.query.all())
         return render_template('book.html', id = id, data=data, flag=flag)
     else:
-        
         quantity=request.form.get('comp_select')
         book = str(data['items'][id]["volumeInfo"]["title"])
         cart=CurrentCart(email=session['log_email'], datetime=datetime.datetime.now(),book=book , quantity=quantity, price=data['items'][id]["saleInfo"]["listPrice"]["amount"])
@@ -145,26 +154,49 @@ def login():
 
 @app.route('/cart',methods=['GET','POST'])
 def cart():
-    session['log_count']=len(CurrentCart.query.all())
-    dp = CurrentCart.query.all()
-    sum=0
-    for d in dp:
-        sum+=(d.__dict__["price"])
-    return render_template('cart.html',size=len(data['items']), data=data, items= CurrentCart.query.all(),bill=sum)
+    if request.method == 'GET':
+        session['log_count']=len(CurrentCart.query.all())
+        dp = CurrentCart.query.all()
+        sum=0
+        for d in dp:
+            sum+=((d.__dict__["price"])*(d.__dict__["quantity"]))
+        bill = sum + sum//10
+        tax = sum//10
+        session['log_count']=len(CurrentCart.query.all())
+        return render_template('cart.html',size=len(data['items']), data=data, items= CurrentCart.query.all(),bill=bill,tax=tax)
+    if request.method == 'POST':
+        c_name = request.form['cus_name']
+        c_phone = request.form['cus_phone']
 
+orders =[]
+order_no=1
 @app.route('/show_orders',methods=['GET','POST'])
 def show_orders():
     session['log_count']=len(CurrentCart.query.all())
     cartx = CurrentCart.query.all()
-    if len(cartx)>0:
+    global orders
+    global order_no
+    cart_collection = []
+    if session['log_count']>0:
         for dx in cartx:
-            order = CustOrders(1,email=session['log_email'],order_id=112,datetime=datetime.datetime.now(),isbn=dx.__dict__["book"],quantity=dx.__dict__["quantity"],price=dx.__dict__["price"])
+            order = CustOrders(1,email=session['log_email'],order_id=order_no,datetime=datetime.datetime.now(),book=dx.book,quantity=dx.quantity,price=dx.price)
+            cart_collection.append(order)
             db.session.add(order)
             db.session.commit()
-        return render_template('show_orders.html')
+        order_no+=1
+        orders.append(cart_collection)
+        for x in orders:
+            print(x)
+        for cart_item in cartx:
+            db.session.delete(cart_item)
+            db.session.commit()
+        session['log_count']=len(CurrentCart.query.all())
+        return render_template('show_all_orders.html',all_orders=orders)
     else:
         error=" Sorry ! There should be something in cart to place order."
         return render_template('show_orders.html',error=error)
+
+
 
 @app.route('/clear_cart',methods=['GET'])
 def clear_cart():
@@ -175,6 +207,7 @@ def clear_cart():
         db.session.delete(cart_item)
         db.session.commit()
     flash("You just cleared the cart!!")
+    session['log_count']=len(CurrentCart.query.all())
     return render_template('cart.html',size=len(data['items']), data=data, items= CurrentCart.query.all(),total=total)
 
 with open("json/catalog.json") as data_file:

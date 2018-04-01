@@ -10,13 +10,19 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <form>
-              <div class="input-group login-userinput">
-                <span class="input-group-addon"></span>
-                <input class="form-control" type="text" name="username" placeholder="Username">
+              <div class="input-field col s6">
+                <!-- <i class="material-icons prefix">account_circle</i>
+                <input class="form-control" type="text" name="username" placeholder="Username"> -->
+                <i class="material-icons prefix">account_circle</i>
+                <input id="last_name" type="text" class="validate" name="username">
+                <label for="last_name">Name</label>
               </div>
-              <div class="input-group">
-                <span class="input-group-addon"></span>
-                <input class="form-control" type="password" name="password" placeholder="Password"> 
+              <div class="input-field col s6">
+                <!-- <i class="material-icons prefix">edit</i>
+                <input class="form-control" type="password" name="password" placeholder="Password">  -->
+                <i class="material-icons prefix">vpn_key</i>
+                <input id="last_name" type="password" class="validate" name="password">
+                <label for="last_name">Password</label>
               </div><br>
               <center><input class="btn btn-small" type="submit" value="Sign In"></input></center>
             </form>     

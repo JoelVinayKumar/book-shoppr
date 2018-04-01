@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 {% block body%}
 	<br></br>
-	<a href="/clear_cart"><button class="btn teal left waves-effect">Clear Cart</button></a>
-	<table class="center">
+	<a href="/clear_cart"><button class="btn red left waves-effect">Clear Cart<i class="fas fa-trash"></i></button></a>
+	<table class="center highlight responsive-table">
 		<thead>
 			  <th>Serail No</th>
 			  <th>Username</th>
-			  <th>ISBN</th>
+			  <th>Book Name</th>
 			  <th>Quantity</th>
-			  <th>Price</th>
+			  <th>Price/book</th>
 		</thead>
 		{% for item in items %}
 	       <tbody>
@@ -23,20 +23,25 @@
 		{% endfor %}
 	</table>
 	<br>
-	<h7 class="right"><b>Bill Amount:</b> ₹ {{ bill }}</h7>
-	</br>
-	<div>
-		<form>
-			<div class="input-field col s6">
-	          <input id="last_name" type="text" class="validate">
-	          <label for="last_name">Name</label>
+	<div class="right">
+		<h7 class="right"><b>Bill Amount:</b> ₹ {{ '%0.2f' % bill }}</h7><br>
+		<p class="right" style="font-size:11px">[Includes Tax of 10% = ₹ {{ tax }}]</p>
+	</div>
+	</br></br></br>
+	<div class="row">
+		<form method="post">
+			<div class="input-field col s3">
+			  <i class="material-icons prefix">account_circle</i>	
+	          <input name="cus_name" type="text" class="validate">
+	          <label >Name</label>
 	        </div>
-        	<div class="input-field col s6">
-	          <input id="last_name" type="text" class="validate">
-	          <label for="last_name">Password</label>
+        	<div class="input-field col s3">
+        	  <i class="material-icons prefix">phone</i>
+	          <input name="cus_phone" type="text" class="validate">
+	          <label >Phone</label>
 	        </div>
     	</form>
     	<br>
-		<a href="/show_orders"><button class="btn teal right">Proceed To Checkout<i class="fas fa-cart-plus"></i></button></a>
+		<a href="/show_orders"><button class="btn teal right">Place The Order<i class="fas fa-cart-plus"></i></button></a>
 	</div>
 {% endblock %}

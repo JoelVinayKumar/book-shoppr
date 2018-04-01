@@ -3,13 +3,13 @@
     <h4 style="margin-bottom: 5%;text-align: center"><b>SHOW BOOKS</b></h4>
     <style>
       .card-adjust{
-          height: 420px; /* Your height here */
+          height: 420px;
           overflow: hidden;
       }
     </style>
     <div class="row container">
       {% for currentBook in range(size) %}
-        <div class="col s6 m6 ">
+        <div class="col s12 m6 ">
           <div class="card-panel card-adjust">
             <center><img class="card-image hoverable" src="{{ data['items'][currentBook]['volumeInfo']['imageLinks']['thumbnail'] }}" alt="book"></center>
             <blockquote class="card-body left" >
