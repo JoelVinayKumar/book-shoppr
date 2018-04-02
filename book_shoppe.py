@@ -152,12 +152,15 @@ def login():
             error='Invalid credentials'
     return render_template('login.html', error=error)
 
+
+bill=0
 @app.route('/cart',methods=['GET','POST'])
 def cart():
     if request.method == 'GET':
         session['log_count']=len(CurrentCart.query.all())
         dp = CurrentCart.query.all()
         sum=0
+        global bill
         for d in dp:
             sum+=((d.__dict__["price"])*(d.__dict__["quantity"]))
         bill = sum + sum//10
@@ -170,6 +173,7 @@ def cart():
 
 orders =[]
 order_no=1
+
 @app.route('/show_orders',methods=['GET','POST'])
 def show_orders():
     session['log_count']=len(CurrentCart.query.all())
@@ -185,8 +189,7 @@ def show_orders():
             db.session.commit()
         order_no+=1
         orders.append(cart_collection)
-        for x in orders:
-            print(x)
+
         for cart_item in cartx:
             db.session.delete(cart_item)
             db.session.commit()
@@ -202,13 +205,14 @@ def show_orders():
 def clear_cart():
     session['log_count']=len(CurrentCart.query.all())
     total=0
+    bill=0
     cart_items= CurrentCart.query.all()
     for cart_item in cart_items:
         db.session.delete(cart_item)
         db.session.commit()
     flash("You just cleared the cart!!")
     session['log_count']=len(CurrentCart.query.all())
-    return render_template('cart.html',size=len(data['items']), data=data, items= CurrentCart.query.all(),total=total)
+    return render_template('cart.html',size=len(data['items']), data=data, items= CurrentCart.query.all(),total=total,bill=bill)
 
 with open("json/catalog.json") as data_file:
     data = json.loads(data_file.read())
