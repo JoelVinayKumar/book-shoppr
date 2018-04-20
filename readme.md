@@ -8,7 +8,7 @@
 * Run book-shoppe.py as  "python book-shoppe.py" or "py book-shoppe.py" depending upon your python version. If you are unsure, you can check it by running command "python --version".
 
 
-##What can this template do?
+## What can this template do?
 
 * For now, it can accept orders and add items to cart.
 * Display a homepage with all items.
