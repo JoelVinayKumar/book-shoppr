@@ -1,6 +1,6 @@
 # FLASK BOOK SHOPPE
 
-Take a look at the live version : book-shoppe.herokuapp.com
+Take a look at the live version : <a href="book-shoppe.herokuapp.com">book-shoppe.herokuapp.com</a>
 
 ## How should I use this template?
 
