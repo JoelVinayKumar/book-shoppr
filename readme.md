@@ -1,5 +1,7 @@
 # FLASK BOOK SHOPPE
 
+Take a look at the live version : https://www.book-shoppe.herokuapp.com
+
 ## How should I use this template?
 
 * Clone the folder or download the zip.
