@@ -1,6 +1,6 @@
 # FLASK BOOK SHOPPE
 
-Take a look at the live version : https://www.book-shoppe.herokuapp.com
+Take a look at the live version : book-shoppe.herokuapp.com
 
 ## How should I use this template?
 
