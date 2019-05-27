@@ -1,6 +1,6 @@
 # FLASK BOOK SHOPPE
 
-http://book-shoppe.herokuapp.com/
+[Live website](http://book-shoppe.herokuapp.com/)
 
 ## How should I use this template?
 
